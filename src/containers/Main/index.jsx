@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Grid, Row, Col } from 'react-flexbox-grid'
-import { Divider } from 'semantic-ui-react'
 
 /*
 * Styles
@@ -16,6 +15,7 @@ import styles from './main.css'
 */
 import CategorySelector from '../CategorySelector'
 import ProductsContent from '../ProductsContent'
+import FiltersBar from '../FiltersBar'
 
 
 /*
@@ -31,7 +31,7 @@ import ProductsContent from '../ProductsContent'
 
 
 const propTypes = {
-  // user: PropTypes.object,
+  categories: PropTypes.object,
   // setUserName: PropTypes.func,
 }
 
@@ -44,24 +44,46 @@ class Main extends Component {
   }
 
   render() {
+    const { categories } = this.props
     return (
-      <Grid fluid>
+      <Grid
+        fluid
+        className={styles.main}
+      >
         <Row
-          className={styles.main}
+          center="xs"
+        >
+          <Col
+            xs={12}
+          >
+            <CategorySelector
+              categories={categories}
+            />
+          </Col>
+        </Row>
+
+        <Row
+          center="xs"
+          between="xs"
+          className={styles.main__content}
         >
           <Col
             md={12}
             lg={3}
-            className={styles.main__categoryGrid}
+            className={styles.main__filterGrid}
           >
-            <CategorySelector />
+            <FiltersBar />
           </Col>
 
-          <Col md={12} lg={9}>
+          <Col
+            md={12}
+            lg={8}
+            className={styles.main__productsGrid}
+          >
             <ProductsContent />
           </Col>
-
         </Row>
+
       </Grid>
     )
   }
@@ -69,6 +91,7 @@ class Main extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    categories: state.categories.categories,
   }
 }
 

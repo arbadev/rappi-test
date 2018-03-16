@@ -35,6 +35,7 @@ module.exports = {
         include: /flexboxgrid/,
       },
       { test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader', 'eslint-loader'] },
+      { test: /\.json$/, loader: 'json' },
     ],
   },
 
