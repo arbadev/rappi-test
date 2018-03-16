@@ -19,7 +19,7 @@ body {
   background-color: $color-grey-light;
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 html {
@@ -27,7 +27,12 @@ html {
   font-size: 62.5%; // 1rem = 10px     10px/16px = 62.5%
 }
 
-.App {
-  height: 100vh;
+.app {
+  height: 98vh;
   background-color: $color-primary-dark;
+  padding: 1rem;
+
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: $regular-box-shadow;
 }

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Grid, Row, Col } from 'react-flexbox-grid'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import 'normalize-css'
 
 import styles from './app.css'
+// import Header from '../../components/Header'
+import Main from '../Main'
 
 class App extends Component {
   constructor() {
@@ -15,18 +16,24 @@ class App extends Component {
 
   render() {
     return (
-      <Grid
-        fluid
-      >
-        <Row className={styles.App}>
-          <Col md={12} lg={3}>
-            Hello, world!
-          </Col>
-          <Col md={12} lg={9}>
-            Hello, world!
-          </Col>
-        </Row>
-      </Grid>
+      <Router>
+        <div
+          className={styles.app}
+        >
+
+          <Switch>
+            <Route exact path="/"
+              render={
+                () => {
+                  return (
+                    <Main />
+                  )
+                }}
+            />
+          </Switch>
+
+        </div>
+      </Router>
     )
   }
 }
