@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import 'normalize-css'
 
 import styles from './app.css'
-import Header from '../../components/Header'
+// import Header from '../../components/Header'
 import Main from '../Main'
 
 class App extends Component {
@@ -17,8 +17,9 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className={styles.body}>
-          <Header />
+        <div
+          className={styles.app}
+        >
 
           <Switch>
             <Route exact path="/"
@@ -30,6 +31,7 @@ class App extends Component {
                 }}
             />
           </Switch>
+
         </div>
       </Router>
     )

@@ -1,0 +1,6 @@
+.main {
+  height: 96vh;
+  background-color: #2b90d9; }
+  .main__categoryGrid {
+    border-right: 0.2rem solid #000;
+    background-color: orangered; }

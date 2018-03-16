@@ -1,0 +1,17 @@
+@import '../../styles/variables';
+
+.main {
+  height: 96vh;
+  background-color: $color-secondary;
+
+  &__categoryGrid {
+    border-right: .2rem solid $color-black;
+    background-color: orangered;
+
+  }
+
+  &__productsGrid {
+
+  }
+
+}

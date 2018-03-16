@@ -1,21 +1,38 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-// import { Link } from 'react-router'
+import { Grid, Row, Col } from 'react-flexbox-grid'
+import { Divider } from 'semantic-ui-react'
+
+/*
+* Styles
+*/
+
+import styles from './main.css'
+
+
+/*
+* Containers
+*/
+import CategorySelector from '../CategorySelector'
+import ProductsContent from '../ProductsContent'
+
 
 /*
  * Components
 */
-import InputMolecule from '../../components/InputMolecule'
+// import InputMolecule from '../../components/InputMolecule'
+
 
 /*
  * Actions
 */
-import { setUserName } from '../../actions/user'
+// import { setUserName } from '../../actions/user'
+
 
 const propTypes = {
-  user: PropTypes.object,
-  setUserName: PropTypes.func,
+  // user: PropTypes.object,
+  // setUserName: PropTypes.func,
 }
 
 class Main extends Component {
@@ -23,48 +40,40 @@ class Main extends Component {
     super(props)
 
     this.state = {
-      username: this.props.user.username,
     }
-
-    this.handleSetName = this.handleSetName.bind(this)
-    this.handleInputChange = this.handleInputChange.bind(this)
-  }
-
-  handleSetName(event) {
-    event.preventDefault()
-    const { username } = this.state
-    this.props.setUserName(username)
-  }
-
-  handleInputChange(event) {
-    event.preventDefault()
-    const { target } = event
-    this.setState({ username: target.value })
   }
 
   render() {
-    const { user } = this.props
-    const { username } = this.state
     return (
-      <InputMolecule
-        stateUsername={username}
-        reduxUsername={user.username}
-        onTextChange={this.handleInputChange}
-        onSetName={this.handleSetName}
-      />
+      <Grid fluid>
+        <Row
+          className={styles.main}
+        >
+          <Col
+            md={12}
+            lg={3}
+            className={styles.main__categoryGrid}
+          >
+            <CategorySelector />
+          </Col>
+
+          <Col md={12} lg={9}>
+            <ProductsContent />
+          </Col>
+
+        </Row>
+      </Grid>
     )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
   }
 }
 
 const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    setUserName,
   }, dispatch)
 }
 

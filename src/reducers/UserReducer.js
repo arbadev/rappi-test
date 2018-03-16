@@ -1,9 +1,7 @@
 import update from 'immutability-helper'
 // import { REHYDRATE } from 'redux-persist/constants'
 
-import {
-  SET_USER_NAME,
-} from '../actions/user'
+import { SET_USER_NAME } from '../actions/user'
 
 const initialState = {
   username: 'And3',
