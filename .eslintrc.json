@@ -27,6 +27,7 @@
     "no-console": [0, "never"],
     "no-confusing-arrow": [0, "never"],
     "jsx-a11y/anchor-is-valid": [0, "never"],
-    "no-prototype-builtins": [0, "never"]
+    "no-prototype-builtins": [0, "never"],
+    "label-has-for": [0, "never"]
   }
 }

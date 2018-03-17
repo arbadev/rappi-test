@@ -43,48 +43,58 @@ class Main extends Component {
     }
   }
 
+  componentDidMount() {
+    console.log('app width', this.category.offsetWidth)
+  }
+
   render() {
     const { categories, products } = this.props
     return (
-      <Grid
-        fluid
-        className={styles.main}
+      <div
+        ref={(a) => { this.category = a }}
       >
-        <Row
-          center="xs"
+        <Grid
+          fluid
+          className={styles.main}
+          ref={(a) => { this.category = a }}
         >
-          <Col
-            xs={12}
+          <Row
+            center="xs"
           >
-            <CategorySelector
-              categories={categories}
-            />
-          </Col>
-        </Row>
+            <Col
+              xs={12}
+            >
+              <CategorySelector
+                categories={categories}
+              />
+            </Col>
+          </Row>
 
-        <Row
-          center="xs"
-          between="xs"
-          className={styles.main__content}
-        >
-          <Col
-            md={12}
-            lg={3}
-            className={styles.main__filterGrid}
+          <Row
+            center="xs"
+            between="xs"
+            className={styles.main__content}
           >
-            <FiltersBar />
-          </Col>
+            <Col
+              md={12}
+              lg={3}
+              className={styles.main__filterGrid}
+            >
+              <FiltersBar />
+            </Col>
 
-          <Col
-            md={12}
-            lg={9}
-            className={styles.main__productsGrid}
-          >
-            <ProductsContent products={products} />
-          </Col>
-        </Row>
+            <Col
+              md={12}
+              lg={9}
+              className={styles.main__productsGrid}
+            >
+              <ProductsContent products={products} />
+            </Col>
+          </Row>
 
-      </Grid>
+        </Grid>
+      </div>
+
     )
   }
 }

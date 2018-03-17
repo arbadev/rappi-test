@@ -1,1 +1,15 @@
 @import '../../styles/variables';
+@import '../../styles/mixins';
+
+.grid {
+  padding: 2rem;
+  // margin-bottom: 5rem;
+}
+
+.formItem {
+  margin-bottom: 1rem;
+  @include responsive(tablet) {
+    margin-bottom: 2rem;
+  }
+
+}

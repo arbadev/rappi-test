@@ -16,7 +16,7 @@ function Product(props) {
       className={styles.product}
     >
       <Card.Content>
-        {/* <Image floated='right' size='mini' src='/assets/images/avatar/large/steve.jpg' /> */}
+        {/* <Label circular color="green" empty attached="top" size="medium" /> */}
         <Card.Header>
           {product.name}
         </Card.Header>
