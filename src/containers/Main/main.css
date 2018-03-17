@@ -23,10 +23,9 @@ Breakpoints arguments choices:
     overflow: hidden; }
   .main__filterGrid {
     height: 10rem;
-    background-color: #2b90d9;
-    margin-bottom: 1rem; }
-    @media (min-width: 64em) {
+    margin-bottom: 5rem; }
+    @media (min-width: 48em) {
       .main__filterGrid {
-        margin-bottom: 0; } }
+        margin-bottom: 10rem; } }
   .main__productsGrid {
     padding: 1rem; }

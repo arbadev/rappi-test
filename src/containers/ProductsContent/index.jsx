@@ -16,6 +16,13 @@ class ProductsContent extends Component {
 
     this.state = {
     }
+
+    this.handleAddToCart = this.handleAddToCart.bind(this)
+  }
+
+  handleAddToCart(product) {
+    // event.preventDefault()
+    console.log('product', product)
   }
 
   render() {
@@ -34,18 +41,7 @@ class ProductsContent extends Component {
         <Row center="xs">
           <Col xs={12}>
             <Card.Group centered>
-              <Product product={products[0]} />
-              <Product product={products[0]} />
-              <Product product={products[0]} />
-              <Product product={products[0]} />
-              <Product product={products[0]} />
-              <Product product={products[0]} />
-              <Product product={products[0]} />
-              <Product product={products[0]} />
-              <Product product={products[0]} />
-              <Product product={products[0]} />
-              <Product product={products[0]} />
-              <Product product={products[0]} />
+              <Product product={products[0]} addToCart={this.handleAddToCart} />
             </Card.Group>
           </Col>
         </Row>

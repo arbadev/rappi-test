@@ -16,12 +16,12 @@
   &__filterGrid {
     height: 10rem;
     // background-image: $gradient-titanium-right;
-    background-color: $color-secondary;
-    margin-bottom: 1rem;
+    // background-color: $color-secondary;
+    margin-bottom: 5rem;
 
-    @include responsive(laptop) {
+    @include responsive(tablet) {
       // height: 90rem;
-      margin-bottom: 0;
+      margin-bottom: 10rem;
     }
 
     // @include responsive(phone) {

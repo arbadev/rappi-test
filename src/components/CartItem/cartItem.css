@@ -14,11 +14,10 @@ Breakpoints arguments choices:
 
 1em = 16px
 */
-.grid {
-  padding: 2rem; }
-
-.formItem {
-  margin-bottom: 1rem; }
-  @media (min-width: 48em) {
-    .formItem {
-      margin-bottom: 2rem; } }
+.cartItem {
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  transition: transform .3s; }
+  .cartItem:hover {
+    transform: translateY(-0.5rem) scale(1.03); }
+  .cartItem__label:not(:last-child) {
+    margin-bottom: 1rem; }

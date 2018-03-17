@@ -57,7 +57,7 @@ class CategorySelector extends PureComponent {
           size="massive"
           inverted
           fluid
-          widths={8}
+          widths={6}
         >
           <Menu.Item
             content="Categorias"
