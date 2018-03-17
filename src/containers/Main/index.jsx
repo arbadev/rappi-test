@@ -44,7 +44,7 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    console.log('app width', this.category.offsetWidth)
+    // console.log('app width', this.category.offsetWidth)
   }
 
   render() {

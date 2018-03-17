@@ -1,21 +1,21 @@
 import React, { PureComponent, PropTypes } from 'react'
 import { Card, Input } from 'semantic-ui-react'
 
-import styles from './product.css'
+import styles from './cartItem.css'
 
 const propTypes = {
   product: PropTypes.object,
   addToCart: PropTypes.func,
 }
 
-class Product extends PureComponent {
+class CartItem extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {}
-    this.onAddProduct = this.onAddProduct.bind(this)
+    this.onCheckout = this.onCheckout.bind(this)
   }
 
-  onAddProduct() {
+  onCheckout() {
     const { product, addToCart } = this.props
     return addToCart(product)
   }
@@ -25,7 +25,7 @@ class Product extends PureComponent {
     return (
       <Card
         color="green"
-        className={styles.product}
+        className={styles.cartItem}
       >
         <Card.Content>
           <Card.Header>
@@ -43,9 +43,9 @@ class Product extends PureComponent {
             action={{
               color: 'black',
               labelPosition: 'left',
-              icon: 'cart',
-              content: 'Agregar',
-              onClick: this.onAddProduct,
+              icon: 'shopping bag',
+              content: 'Comprar',
+              onClick: this.onCheckout,
             }}
             type="number"
             actionPosition="left"
@@ -62,5 +62,5 @@ class Product extends PureComponent {
 }
 
 
-Product.propTypes = propTypes
-export default Product
+CartItem.propTypes = propTypes
+export default CartItem
