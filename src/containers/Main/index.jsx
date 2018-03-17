@@ -32,7 +32,7 @@ import FiltersBar from '../FiltersBar'
 
 const propTypes = {
   categories: PropTypes.object,
-  // setUserName: PropTypes.func,
+  products: PropTypes.object,
 }
 
 class Main extends Component {
@@ -44,7 +44,7 @@ class Main extends Component {
   }
 
   render() {
-    const { categories } = this.props
+    const { categories, products } = this.props
     return (
       <Grid
         fluid
@@ -77,10 +77,10 @@ class Main extends Component {
 
           <Col
             md={12}
-            lg={8}
+            lg={9}
             className={styles.main__productsGrid}
           >
-            <ProductsContent />
+            <ProductsContent products={products} />
           </Col>
         </Row>
 
@@ -92,6 +92,7 @@ class Main extends Component {
 const mapStateToProps = (state) => {
   return {
     categories: state.categories.categories,
+    products: state.products.products,
   }
 }
 
