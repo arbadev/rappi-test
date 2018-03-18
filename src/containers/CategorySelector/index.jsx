@@ -28,7 +28,6 @@ class CategorySelector extends PureComponent {
           pointing
           // className="link item"
           item
-          onClick={() => console.log('clicked item', item)}
         >
           <Dropdown.Menu>
             <Dropdown.Header>
@@ -52,7 +51,6 @@ class CategorySelector extends PureComponent {
 
   render() {
     const { categories, visible } = this.props
-    console.log('styles', styles)
     return (
       <div className={styles.categorySelector}>
         <Sidebar
@@ -62,7 +60,6 @@ class CategorySelector extends PureComponent {
           width="thin"
           visible={visible}
           vertical
-          inverted
           className={styles.sidebar}
         >
           <Menu.Item

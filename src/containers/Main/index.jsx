@@ -67,7 +67,7 @@ class Main extends Component {
     const { visible } = this.state
     return (
       <div>
-        <Button onClick={this.toggleVisibility}>Toggle Visibility</Button>
+        <Button onClick={this.toggleVisibility} size="large" color="black">Menu de Categorias</Button>
         <Sidebar.Pushable as={Segment} >
           <CategorySelector
             categories={categories}
@@ -81,6 +81,14 @@ class Main extends Component {
                 className={styles.main}
                 // ref={(a) => { this.category = a }}
               >
+                <Link to="/cart">
+                  <Button
+                    icon="shop"
+                    circular
+                    floated="right"
+                    size="massive"
+                  />
+                </Link>
                 <Row
                   center="xs"
                   between="xs"
@@ -102,14 +110,6 @@ class Main extends Component {
                     <ProductsContent products={products} />
                   </Col>
                 </Row>
-                <Link to="/cart">
-                  <Button
-                    icon="shop"
-                    circular
-                    floated="right"
-                    size="massive"
-                  />
-                </Link>
               </Grid>
             </Segment>
           </Sidebar.Pusher>
