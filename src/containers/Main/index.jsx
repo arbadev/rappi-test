@@ -33,8 +33,8 @@ import { setCategory } from '../../actions/inventory'
 
 
 const propTypes = {
-  categories: PropTypes.object,
-  products: PropTypes.object,
+  categories: PropTypes.array,
+  products: PropTypes.array,
   setCategory: PropTypes.func,
 }
 
@@ -118,7 +118,7 @@ class Main extends Component {
 const mapStateToProps = (state) => {
   return {
     categories: state.inventory.categories,
-    products: state.inventory.products,
+    products: state.inventory.filteredProduts,
   }
 }
 

@@ -5,7 +5,7 @@ import { Dropdown, Menu } from 'semantic-ui-react'
 import styles from './categorySelector.css'
 
 const propTypes = {
-  categories: PropTypes.object,
+  categories: PropTypes.array,
   onSetCategory: PropTypes.func,
 }
 
@@ -50,7 +50,7 @@ class CategorySelector extends PureComponent {
   }
 
   render() {
-    const { categories } = this.props.categories
+    const { categories } = this.props
     // console.log('categories', categories)
     return (
       <div className={styles.categorySelector}>

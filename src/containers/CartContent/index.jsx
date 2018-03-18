@@ -10,7 +10,7 @@ import styles from './cartContent.css'
 import CartItem from '../../components/CartItem'
 
 const propTypes = {
-  products: PropTypes.object,
+  products: PropTypes.array,
 }
 
 class CartContent extends Component {
@@ -28,7 +28,7 @@ class CartContent extends Component {
   }
 
   render() {
-    const { products } = this.props.products
+    const { products } = this.props
     console.log('products', products)
     return (
       <div>
