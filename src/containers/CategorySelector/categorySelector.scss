@@ -1,45 +1,7 @@
 @import '../../styles/variables';
 
-.categorySelector {
-  // padding: 3rem;
-  // font-size: 3rem;
-
-  &__heading {
-    font-size: 2.5rem;
-    text-transform: uppercase;
-    font-weight: 700;
-    display: inline-block;
-
-    background-color: #f15c5c;
-    -webkit-background-clip: text;
-    color: transparent;
-    letter-spacing: .2rem;
-    transition: all .2s;
-
-    // @include respond(tab-port) {
-    //   font-size: 3rem;
-    // }
-    //
-    // @include respond(phone) {
-    //   font-size: 2.5rem;
-    // }
-
-    &:hover {
-      transform: skewX(15deg) skewY(2deg) scale(1.1);
-      text-shadow: .5rem 1rem 2rem rgba($color-black, .2);
-    }
-  }
-
-  &__categoryList {
-    margin-top: 5rem;
-    font-size: 3rem;
-  }
-}
-
-.dropdown__header {
-  font-size: 10rem;
-}
-
-.dropdown__item {
-  font-size: 5rem;
+#sidebar {
+  overflow: visible!important;
+  overflow-y: visible !important;
+  overflow-x: visible !important;
 }

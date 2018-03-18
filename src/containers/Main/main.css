@@ -15,8 +15,7 @@ Breakpoints arguments choices:
 1em = 16px
 */
 .main {
-  border-radius: 3px;
-  overflow: hidden; }
+  border-radius: 3px; }
   .main__content {
     margin: 2rem 0;
     border-radius: 3px;
@@ -29,3 +28,6 @@ Breakpoints arguments choices:
         margin-bottom: 10rem; } }
   .main__productsGrid {
     padding: 1rem; }
+
+.sidebar {
+  overflow: visible !important; }

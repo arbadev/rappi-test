@@ -4,7 +4,9 @@
 .main {
   // height: 95rem;
   border-radius: 3px;
-  overflow: hidden;
+  // overflow: hidden;
+  // background-color: $color-primary;
+  // overflow: visible !important;
 
   &__content {
     margin: 2rem 0;
@@ -41,4 +43,8 @@
     // background-color: $color-secondary;
   }
 
+}
+
+.sidebar {
+  overflow: visible !important;
 }

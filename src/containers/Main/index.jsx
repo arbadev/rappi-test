@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Grid, Row, Col } from 'react-flexbox-grid'
-import { Button } from 'semantic-ui-react'
+import { Button, Sidebar, Segment, Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 /*
@@ -43,8 +43,10 @@ class Main extends Component {
     super(props)
 
     this.state = {
+      visible: false,
     }
     this.handleSetCategory = this.handleSetCategory.bind(this)
+    this.toggleVisibility = this.toggleVisibility.bind(this)
   }
 
   componentDidMount() {
@@ -56,59 +58,63 @@ class Main extends Component {
     this.props.setCategory(category)
   }
 
+  toggleVisibility() {
+    this.setState({ visible: !this.state.visible })
+  }
+
   render() {
     const { categories, products } = this.props
+    const { visible } = this.state
     return (
       <div>
-        <Grid
-          fluid
-          className={styles.main}
-          // ref={(a) => { this.category = a }}
-        >
-          <Row
-            center="xs"
-          >
-            <Col
-              xs={12}
-            >
-              <CategorySelector
-                categories={categories}
-                onSetCategory={this.handleSetCategory}
-              />
-            </Col>
-          </Row>
+        <Button onClick={this.toggleVisibility}>Toggle Visibility</Button>
+        <Sidebar.Pushable as={Segment} >
+          <CategorySelector
+            categories={categories}
+            onSetCategory={this.handleSetCategory}
+            visible={visible}
+          />
+          <Sidebar.Pusher>
+            <Segment basic>
+              <Grid
+                fluid
+                className={styles.main}
+                // ref={(a) => { this.category = a }}
+              >
+                <Row
+                  center="xs"
+                  between="xs"
+                  className={styles.main__content}
+                >
+                  <Col
+                    md={12}
+                    lg={3}
+                    className={styles.main__filterGrid}
+                  >
+                    <FiltersBar />
+                  </Col>
 
-          <Row
-            center="xs"
-            between="xs"
-            className={styles.main__content}
-          >
-            <Col
-              md={12}
-              lg={3}
-              className={styles.main__filterGrid}
-            >
-              <FiltersBar />
-            </Col>
+                  <Col
+                    md={12}
+                    lg={9}
+                    className={styles.main__productsGrid}
+                  >
+                    <ProductsContent products={products} />
+                  </Col>
+                </Row>
+                <Link to="/cart">
+                  <Button
+                    icon="shop"
+                    circular
+                    floated="right"
+                    size="massive"
+                  />
+                </Link>
+              </Grid>
+            </Segment>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
 
-            <Col
-              md={12}
-              lg={9}
-              className={styles.main__productsGrid}
-            >
-              <ProductsContent products={products} />
-            </Col>
-          </Row>
-          <Link to="/cart">
-            <Button
-              icon="shop"
-              circular
-              floated="right"
-              size="massive"
-            />
-          </Link>
-
-        </Grid>
       </div>
 
     )
