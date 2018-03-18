@@ -1,22 +1,23 @@
 import update from 'immutability-helper'
 // import { REHYDRATE } from 'redux-persist/constants'
-import { categories } from '../data/categories.json'
-import { products } from '../data/products.json'
+import categoriesData from '../data/categories.json'
+import productsData from '../data/products.json'
 
 import { SET_CATEGORY } from '../actions/inventory'
 
 const initialState = {
   selectedCategory: null,
-  filteredProduts: products,
-  categories,
-  products,
+  filteredProduts: productsData.products,
+  categories: categoriesData.categories,
+  products: productsData.products,
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_CATEGORY: {
       const { category } = action
-      let { filteredProduts, products } = state
+      const { products } = state
+      let { filteredProduts } = state
       filteredProduts = products
       filteredProduts = filteredProduts.filter(product => product.sublevel_id === category.id)
       return update(state, {
