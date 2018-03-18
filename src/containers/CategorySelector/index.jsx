@@ -1,44 +1,14 @@
 import React, { PureComponent, PropTypes } from 'react'
-import { Dropdown, Menu } from 'semantic-ui-react'
+import { Dropdown, Menu, Sidebar } from 'semantic-ui-react'
 // import { Row, Col } from 'react-flexbox-grid'
 
 import styles from './categorySelector.css'
 
 const propTypes = {
-  categories: PropTypes.object,
+  categories: PropTypes.array,
+  onSetCategory: PropTypes.func,
+  visible: PropTypes.bool,
 }
-
-
-const buildRecursiveItem = (item) => {
-  if (item.hasOwnProperty('sublevels')) {
-    return (
-      <Dropdown
-        key={item.id}
-        text={item.name}
-        pointing
-        className="link item"
-      >
-        <Dropdown.Menu>
-          <Dropdown.Header
-            className={styles.dropdown__header}
-          >
-            {`${item.name} sub`}
-          </Dropdown.Header>
-          {item.sublevels.map(nestedItem => buildRecursiveItem(nestedItem))}
-        </Dropdown.Menu>
-      </Dropdown>
-    )
-  }
-  return (
-    <Menu.Item
-      key={item.id}
-      className={styles.dropdown__item}
-    >
-      {item.name}
-    </Menu.Item>
-  )
-}
-
 
 class CategorySelector extends PureComponent {
   constructor() {
@@ -46,27 +16,59 @@ class CategorySelector extends PureComponent {
 
     this.state = {
     }
+    this.buildRecursiveItem = this.buildRecursiveItem.bind(this)
+  }
+
+  buildRecursiveItem(item) {
+    if (item.hasOwnProperty('sublevels')) {
+      return (
+        <Dropdown
+          key={item.id}
+          text={item.name}
+          pointing
+          // className="link item"
+          item
+        >
+          <Dropdown.Menu>
+            <Dropdown.Header>
+              {`${item.name} sub`}
+            </Dropdown.Header>
+            {item.sublevels.map(nestedItem => this.buildRecursiveItem(nestedItem))}
+          </Dropdown.Menu>
+        </Dropdown>
+      )
+    }
+    return (
+      <Menu.Item
+        key={item.id}
+        // className={styles.dropdown__item}
+        onClick={() => this.props.onSetCategory(item)}
+      >
+        {item.name}
+      </Menu.Item>
+    )
   }
 
   render() {
-    const { categories } = this.props.categories
-    // console.log('categories', categories)
+    const { categories, visible } = this.props
     return (
       <div className={styles.categorySelector}>
-        <Menu
-          size="massive"
-          inverted
-          fluid
-          widths={6}
+        <Sidebar
+          id={styles.sb}
+          as={Menu}
+          animation="overlay"
+          width="thin"
+          visible={visible}
+          vertical
+          className={styles.sidebar}
         >
           <Menu.Item
             content="Categorias"
-            color="blue"
             header
             position="left"
           />
-          {categories.map(item => buildRecursiveItem(item))}
-        </Menu>
+          {categories.map(item => this.buildRecursiveItem(item))}
+        </Sidebar>
       </div>
     )
   }

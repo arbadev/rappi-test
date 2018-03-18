@@ -24,7 +24,7 @@ class Product extends PureComponent {
     const { product } = this.props
     return (
       <Card
-        color="green"
+        color={product.quantity > 0 ? 'green' : 'red'}
         className={styles.product}
       >
         <Card.Content>

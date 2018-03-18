@@ -7,7 +7,7 @@ import styles from './productsContent.css'
 import Product from '../../components/Product'
 
 const propTypes = {
-  products: PropTypes.object,
+  products: PropTypes.array,
 }
 
 class ProductsContent extends Component {
@@ -18,30 +18,42 @@ class ProductsContent extends Component {
     }
 
     this.handleAddToCart = this.handleAddToCart.bind(this)
+    this.renderProducts = this.renderProducts.bind(this)
   }
 
   handleAddToCart(product) {
-    // event.preventDefault()
     console.log('product', product)
   }
 
+  renderProducts(products) {
+    if (products.length > 0) {
+      return products.map((product) => {
+        return (
+          <Product
+            key={product.id}
+            product={product}
+            addToCart={this.handleAddToCart}
+          />
+        )
+      })
+    }
+    return <Statistic label="Intente nueva busqueda" className={styles.heading} />
+  }
+
   render() {
-    const { products } = this.props.products
+    const { products } = this.props
     // console.log('products', products)
-    const valueText = `${products.length} coincidencias`
     return (
       <div>
         <Statistic
           className={styles.heading}
-        >
-          <Statistic.Value>{products.length} </Statistic.Value>
-          <Statistic.Label>Productos</Statistic.Label>
-        </Statistic>
-
+          label="Productos"
+          value={products.length}
+        />
         <Row center="xs">
           <Col xs={12}>
             <Card.Group centered>
-              <Product product={products[0]} addToCart={this.handleAddToCart} />
+              {this.renderProducts(products)}
             </Card.Group>
           </Col>
         </Row>

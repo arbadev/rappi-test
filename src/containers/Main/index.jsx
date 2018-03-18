@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Grid, Row, Col } from 'react-flexbox-grid'
+import { Button, Sidebar, Segment, Menu } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 /*
 * Styles
@@ -27,12 +29,13 @@ import FiltersBar from '../FiltersBar'
 /*
  * Actions
 */
-// import { setUserName } from '../../actions/user'
+import { setCategory } from '../../actions/inventory'
 
 
 const propTypes = {
-  categories: PropTypes.object,
-  products: PropTypes.object,
+  categories: PropTypes.array,
+  products: PropTypes.array,
+  setCategory: PropTypes.func,
 }
 
 class Main extends Component {
@@ -40,59 +43,78 @@ class Main extends Component {
     super(props)
 
     this.state = {
+      visible: false,
     }
+    this.handleSetCategory = this.handleSetCategory.bind(this)
+    this.toggleVisibility = this.toggleVisibility.bind(this)
   }
 
   componentDidMount() {
     // console.log('app width', this.category.offsetWidth)
   }
 
+  handleSetCategory(category) {
+    console.log('asdasdasdas category', category)
+    this.props.setCategory(category)
+  }
+
+  toggleVisibility() {
+    this.setState({ visible: !this.state.visible })
+  }
+
   render() {
     const { categories, products } = this.props
+    const { visible } = this.state
     return (
-      <div
-        ref={(a) => { this.category = a }}
-      >
-        <Grid
-          fluid
-          className={styles.main}
-          ref={(a) => { this.category = a }}
-        >
-          <Row
-            center="xs"
-          >
-            <Col
-              xs={12}
-            >
-              <CategorySelector
-                categories={categories}
-              />
-            </Col>
-          </Row>
+      <div>
+        <Button onClick={this.toggleVisibility} size="large" color="black">Menu de Categorias</Button>
+        <Sidebar.Pushable as={Segment} >
+          <CategorySelector
+            categories={categories}
+            onSetCategory={this.handleSetCategory}
+            visible={visible}
+          />
+          <Sidebar.Pusher>
+            <Segment basic>
+              <Grid
+                fluid
+                className={styles.main}
+                // ref={(a) => { this.category = a }}
+              >
+                <Link to="/cart">
+                  <Button
+                    icon="shop"
+                    circular
+                    floated="right"
+                    size="massive"
+                  />
+                </Link>
+                <Row
+                  center="xs"
+                  between="xs"
+                  className={styles.main__content}
+                >
+                  <Col
+                    md={12}
+                    lg={3}
+                    className={styles.main__filterGrid}
+                  >
+                    <FiltersBar />
+                  </Col>
 
-          <Row
-            center="xs"
-            between="xs"
-            className={styles.main__content}
-          >
-            <Col
-              md={12}
-              lg={3}
-              className={styles.main__filterGrid}
-            >
-              <FiltersBar />
-            </Col>
+                  <Col
+                    md={12}
+                    lg={9}
+                    className={styles.main__productsGrid}
+                  >
+                    <ProductsContent products={products} />
+                  </Col>
+                </Row>
+              </Grid>
+            </Segment>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
 
-            <Col
-              md={12}
-              lg={9}
-              className={styles.main__productsGrid}
-            >
-              <ProductsContent products={products} />
-            </Col>
-          </Row>
-
-        </Grid>
       </div>
 
     )
@@ -101,13 +123,14 @@ class Main extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    categories: state.categories.categories,
-    products: state.products.products,
+    categories: state.inventory.categories,
+    products: state.inventory.filteredProduts,
   }
 }
 
 const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
+    setCategory,
   }, dispatch)
 }
 
