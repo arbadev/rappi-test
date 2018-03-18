@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Grid, Row, Col } from 'react-flexbox-grid'
+import { Button } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 /*
 * Styles
@@ -27,12 +29,13 @@ import FiltersBar from '../FiltersBar'
 /*
  * Actions
 */
-// import { setUserName } from '../../actions/user'
+import { setCategory } from '../../actions/inventory'
 
 
 const propTypes = {
   categories: PropTypes.object,
   products: PropTypes.object,
+  setCategory: PropTypes.func,
 }
 
 class Main extends Component {
@@ -41,22 +44,26 @@ class Main extends Component {
 
     this.state = {
     }
+    this.handleSetCategory = this.handleSetCategory.bind(this)
   }
 
   componentDidMount() {
     // console.log('app width', this.category.offsetWidth)
   }
 
+  handleSetCategory(category) {
+    console.log('asdasdasdas category', category)
+    this.props.setCategory(category)
+  }
+
   render() {
     const { categories, products } = this.props
     return (
-      <div
-        ref={(a) => { this.category = a }}
-      >
+      <div>
         <Grid
           fluid
           className={styles.main}
-          ref={(a) => { this.category = a }}
+          // ref={(a) => { this.category = a }}
         >
           <Row
             center="xs"
@@ -66,6 +73,7 @@ class Main extends Component {
             >
               <CategorySelector
                 categories={categories}
+                onSetCategory={this.handleSetCategory}
               />
             </Col>
           </Row>
@@ -91,6 +99,14 @@ class Main extends Component {
               <ProductsContent products={products} />
             </Col>
           </Row>
+          <Link to="/cart">
+            <Button
+              icon="shop"
+              circular
+              floated="right"
+              size="massive"
+            />
+          </Link>
 
         </Grid>
       </div>
@@ -101,13 +117,14 @@ class Main extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    categories: state.categories.categories,
-    products: state.products.products,
+    categories: state.inventory.categories,
+    products: state.inventory.products,
   }
 }
 
 const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
+    setCategory,
   }, dispatch)
 }
 

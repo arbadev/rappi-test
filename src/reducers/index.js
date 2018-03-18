@@ -1,12 +1,8 @@
 import { combineReducers } from 'redux'
-import UserReducer from './UserReducer'
-import CategoriesReducer from './CategoriesReducer'
-import ProductsReducer from './ProductsReducer'
+import InventoryReducer from './InventoryReducer'
 
 const reducers = combineReducers({
-  user: UserReducer,
-  categories: CategoriesReducer,
-  products: ProductsReducer,
+  inventory: InventoryReducer,
 })
 
 export default reducers

@@ -21,14 +21,12 @@ class ProductsContent extends Component {
   }
 
   handleAddToCart(product) {
-    // event.preventDefault()
     console.log('product', product)
   }
 
   render() {
     const { products } = this.props.products
     // console.log('products', products)
-    const valueText = `${products.length} coincidencias`
     return (
       <div>
         <Statistic
