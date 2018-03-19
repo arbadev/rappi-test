@@ -8,6 +8,13 @@ const propTypes = {
   onFiltersChange: PropTypes.func,
 }
 
+const getSortByUpdate = (id, sortBy) => {
+  console.log(Object.keys(sortBy))
+  Object.keys(sortBy).map(key => key === id ? sortBy[key] = true : sortBy[key] = false)
+  console.log('sortBy', sortBy)
+  return { sortBy }
+}
+
 class FiltersBar extends Component {
   constructor() {
     super()
@@ -16,19 +23,28 @@ class FiltersBar extends Component {
       searchName: '',
       searchQuantity: '',
       onlyAvailables: false,
-      price: false,
-      quantity: false,
-      available: false,
+      sortBy: {
+        price: false,
+        quantity: false,
+        // available: false,
+      },
     }
 
     this.onSearchChange = this.onSearchChange.bind(this)
   }
 
   onSearchChange(e, { id, value, checked }) {
-    this.setState(
-      {
+    let stateUpdate = {}
+    if ((id === 'price') || (id === 'quantity') || (id === 'available')) {
+      const { sortBy } = this.state
+      stateUpdate = getSortByUpdate(id, sortBy)
+    } else {
+      stateUpdate = {
         [id]: value || checked,
-      },
+      }
+    }
+    this.setState(
+      stateUpdate,
       () => {
         return this.props.onFiltersChange(this.state)
       },
@@ -37,7 +53,7 @@ class FiltersBar extends Component {
 
   render() {
     const {
-      searchName, searchQuantity, onlyAvailables, price, quantity, available,
+      searchName, searchQuantity, onlyAvailables, sortBy,
     } = this.state
     return (
       <Grid
@@ -69,6 +85,7 @@ class FiltersBar extends Component {
             <Form.Field>
               <Label pointing="below">Filtros</Label>
               <Input
+                type="number"
                 icon="search"
                 id="searchQuantity"
                 placeholder="Cantidad"
@@ -94,11 +111,12 @@ class FiltersBar extends Component {
           <Form.Group
             inline
             unstackable
+            widths="equal"
           >
-            <label>Orden por</label>
-            <Form.Field control={Radio} checked={price} label="Precio" id="price" onChange={this.onSearchChange} />
-            <Form.Field control={Radio} checked={quantity} label="Cantidad" id="quantity" onChange={this.onSearchChange} />
-            <Form.Field control={Radio} checked={available} label="Disponibilidad" id="available" onChange={this.onSearchChange} />
+            <label>Ordenar</label>
+            <Form.Field control={Radio} checked={sortBy.price} label="Precio" id="price" onChange={this.onSearchChange} />
+            <Form.Field control={Radio} checked={sortBy.quantity} label="Cantidad" id="quantity" onChange={this.onSearchChange} />
+            {/* <Form.Field control={Radio} checked={available} label="Disponibilidad" id="available" onChange={this.onSearchChange} /> */}
           </Form.Group>
         </Form>
       </Grid>
