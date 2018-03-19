@@ -1,18 +1,60 @@
-import React, { Component } from 'react'
-import { Segment, Grid, Search, Header, Label, Form, Checkbox, Radio} from 'semantic-ui-react'
+import React, { Component, PropTypes } from 'react'
+import { Grid, Label, Form, Checkbox, Radio, Input } from 'semantic-ui-react'
 
 import styles from './filtersBar.css'
+
+
+const propTypes = {
+  onFiltersChange: PropTypes.func,
+}
+
+const getSortByUpdate = (id, sortBy) => {
+  console.log(Object.keys(sortBy))
+  Object.keys(sortBy).map(key => key === id ? sortBy[key] = true : sortBy[key] = false)
+  console.log('sortBy', sortBy)
+  return { sortBy }
+}
 
 class FiltersBar extends Component {
   constructor() {
     super()
 
     this.state = {
+      searchName: '',
+      searchQuantity: '0',
+      onlyAvailables: false,
+      sortBy: {
+        price: false,
+        quantity: false,
+        // available: false,
+      },
     }
+
+    this.onSearchChange = this.onSearchChange.bind(this)
+  }
+
+  onSearchChange(e, { id, value, checked }) {
+    let stateUpdate = {}
+    if ((id === 'price') || (id === 'quantity') || (id === 'available')) {
+      const { sortBy } = this.state
+      stateUpdate = getSortByUpdate(id, sortBy)
+    } else {
+      stateUpdate = {
+        [id]: value || checked,
+      }
+    }
+    this.setState(
+      stateUpdate,
+      () => {
+        return this.props.onFiltersChange(this.state)
+      },
+    )
   }
 
   render() {
-    const value = '1'
+    const {
+      searchName, searchQuantity, onlyAvailables, sortBy,
+    } = this.state
     return (
       <Grid
         centered
@@ -26,15 +68,12 @@ class FiltersBar extends Component {
           >
             <Form.Field>
               <Label pointing="below">Buscador por nombre</Label>
-              <Search
-                category
+              <Input
+                icon="search"
+                id="searchName"
                 placeholder="Nombre del producto"
-                // loading={isLoading}
-                // onResultSelect={this.handleResultSelect}
-                // onSearchChange={this.handleSearchChange}
-                // results={results}
-                // value={value}
-                // {...this.props}
+                value={searchName}
+                onChange={this.onSearchChange}
               />
             </Form.Field>
           </Form.Group>
@@ -44,16 +83,15 @@ class FiltersBar extends Component {
             unstackable
           >
             <Form.Field>
-              <Label pointing="below">Filtros</Label>
-              <Search
-                category
+              <Label pointing="below">Cantidad</Label>
+              <Input
+                type="number"
+                icon="search"
+                id="searchQuantity"
+                min={0}
                 placeholder="Cantidad"
-                // loading={isLoading}
-                // onResultSelect={this.handleResultSelect}
-                // onSearchChange={this.handleSearchChange}
-                // results={results}
-                // value={value}
-                // {...this.props}
+                value={searchQuantity}
+                onChange={this.onSearchChange}
               />
             </Form.Field>
           </Form.Group>
@@ -61,23 +99,34 @@ class FiltersBar extends Component {
           <Form.Group
             widths="equal"
             unstackable
+            inline
           >
-            <Form.Field control={Checkbox} label="Solo disponibles" />
+            <Label size="large">Filtros</Label>
+            <Form.Field
+              control={Checkbox}
+              id="onlyAvailables"
+              checked={onlyAvailables}
+              label="Solo disponibles"
+              onChange={this.onSearchChange}
+            />
           </Form.Group>
 
           <Form.Group
             inline
             unstackable
+            widths="equal"
           >
-            <label>Orden por</label>
-            <Form.Field control={Radio} label="Precio" value="1" checked={value === '1'} onChange={this.handleChange} />
-            <Form.Field control={Radio} label="Cantidad" value="2" checked={value === '2'} onChange={this.handleChange} />
-            <Form.Field control={Radio} label="Disponible" value="3" checked={value === '3'} onChange={this.handleChange} />
+            <Label size="large">Ordenar</Label>
+            <Form.Field control={Radio} checked={sortBy.price} label="Precio" id="price" onChange={this.onSearchChange} />
+            <Form.Field control={Radio} checked={sortBy.quantity} label="Cantidad" id="quantity" onChange={this.onSearchChange} />
+            {/* <Form.Field control={Radio} checked={sortBy.available} label="Disponibilidad" id="available" onChange={this.onSearchChange} /> */}
           </Form.Group>
         </Form>
       </Grid>
     )
   }
 }
+
+FiltersBar.propTypes = propTypes
 
 export default FiltersBar

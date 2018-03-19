@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Grid, Row, Col } from 'react-flexbox-grid'
-import { Button, Sidebar, Segment, Menu } from 'semantic-ui-react'
+import { Button, Sidebar, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 /*
@@ -38,23 +38,36 @@ const propTypes = {
   setCategory: PropTypes.func,
 }
 
+const sortByProp = (products, prop) => {
+  return products.sort((a, b) => {
+    if (prop === 'price') {
+      return a[prop].replace(/[^\d.]/g, '') - b[prop].replace(/[^\d.]/g, '')
+    }
+    return a[prop] - b[prop]
+  })
+}
+
 class Main extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       visible: false,
+      products: this.props.products,
     }
     this.handleSetCategory = this.handleSetCategory.bind(this)
     this.toggleVisibility = this.toggleVisibility.bind(this)
+    this.handleFiltersState = this.handleFiltersState.bind(this)
   }
 
-  componentDidMount() {
-    // console.log('app width', this.category.offsetWidth)
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps', nextProps)
+    const { products } = nextProps
+    this.setState({ products })
   }
 
   handleSetCategory(category) {
-    console.log('asdasdasdas category', category)
+    // console.log('category', category)
     this.props.setCategory(category)
   }
 
@@ -62,9 +75,38 @@ class Main extends Component {
     this.setState({ visible: !this.state.visible })
   }
 
+  handleFiltersState(filtersState) {
+    const {
+      searchName, searchQuantity, onlyAvailables, sortBy,
+    } = filtersState
+    const { products } = this.props
+    let filteredProduts = products.filter((product) => {
+      let auxName = true
+      let auxQuantity = false
+      let auxAvailable = true
+
+      if (searchName && searchName.length > 0) {
+        auxName = product.name.includes(searchName)
+      }
+      auxQuantity = product.quantity >= searchQuantity
+
+      if (onlyAvailables) {
+        auxAvailable = product.quantity > 0
+      }
+      return auxName && auxQuantity && auxAvailable
+    })
+    if (sortBy.price || sortBy.quantity) {
+      const sortProp = sortBy.price ? 'price' : 'quantity'
+      filteredProduts = sortByProp(filteredProduts, sortProp)
+    }
+    this.setState({
+      products: filteredProduts,
+    })
+  }
+
   render() {
-    const { categories, products } = this.props
-    const { visible } = this.state
+    const { categories } = this.props
+    const { visible, products } = this.state
     return (
       <div>
         <Button onClick={this.toggleVisibility} size="large" color="black">Menu de Categorias</Button>
@@ -99,7 +141,7 @@ class Main extends Component {
                     lg={3}
                     className={styles.main__filterGrid}
                   >
-                    <FiltersBar />
+                    <FiltersBar onFiltersChange={this.handleFiltersState} />
                   </Col>
 
                   <Col

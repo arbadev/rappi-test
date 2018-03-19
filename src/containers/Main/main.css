@@ -22,7 +22,7 @@ Breakpoints arguments choices:
     overflow: hidden; }
   .main__filterGrid {
     height: 10rem;
-    margin-bottom: 5rem; }
+    margin-bottom: 12rem; }
     @media (min-width: 48em) {
       .main__filterGrid {
         margin-bottom: 10rem; } }
