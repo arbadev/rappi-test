@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Grid, Row, Col } from 'react-flexbox-grid'
-import { Button, Sidebar, Segment, Menu } from 'semantic-ui-react'
+import { Button, Sidebar, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 /*
@@ -44,13 +44,21 @@ class Main extends Component {
 
     this.state = {
       visible: false,
+      products: this.props.products,
     }
     this.handleSetCategory = this.handleSetCategory.bind(this)
     this.toggleVisibility = this.toggleVisibility.bind(this)
+    this.handleFiltersState = this.handleFiltersState.bind(this)
   }
 
   componentDidMount() {
     // console.log('app width', this.category.offsetWidth)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps', nextProps)
+    const { products } = nextProps
+    this.setState({ products })
   }
 
   handleSetCategory(category) {
@@ -62,9 +70,13 @@ class Main extends Component {
     this.setState({ visible: !this.state.visible })
   }
 
+  handleFiltersState(state) {
+    console.log('state @ filtersBar', state)
+  }
+
   render() {
-    const { categories, products } = this.props
-    const { visible } = this.state
+    const { categories } = this.props
+    const { visible, products } = this.state
     return (
       <div>
         <Button onClick={this.toggleVisibility} size="large" color="black">Menu de Categorias</Button>
@@ -99,7 +111,7 @@ class Main extends Component {
                     lg={3}
                     className={styles.main__filterGrid}
                   >
-                    <FiltersBar />
+                    <FiltersBar onFiltersChange={this.handleFiltersState} />
                   </Col>
 
                   <Col

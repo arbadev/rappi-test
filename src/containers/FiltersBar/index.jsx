@@ -1,18 +1,44 @@
-import React, { Component } from 'react'
-import { Segment, Grid, Search, Header, Label, Form, Checkbox, Radio} from 'semantic-ui-react'
+import React, { Component, PropTypes } from 'react'
+import { Grid, Label, Form, Checkbox, Radio, Input } from 'semantic-ui-react'
 
 import styles from './filtersBar.css'
+
+
+const propTypes = {
+  onFiltersChange: PropTypes.func,
+}
 
 class FiltersBar extends Component {
   constructor() {
     super()
 
     this.state = {
+      searchName: '',
+      searchQuantity: '',
+      onlyAvailables: false,
+      price: false,
+      quantity: false,
+      available: false,
     }
+
+    this.onSearchChange = this.onSearchChange.bind(this)
+  }
+
+  onSearchChange(e, { id, value, checked }) {
+    this.setState(
+      {
+        [id]: value || checked,
+      },
+      () => {
+        return this.props.onFiltersChange(this.state)
+      },
+    )
   }
 
   render() {
-    const value = '1'
+    const {
+      searchName, searchQuantity, onlyAvailables, price, quantity, available,
+    } = this.state
     return (
       <Grid
         centered
@@ -26,15 +52,12 @@ class FiltersBar extends Component {
           >
             <Form.Field>
               <Label pointing="below">Buscador por nombre</Label>
-              <Search
-                category
+              <Input
+                icon="search"
+                id="searchName"
                 placeholder="Nombre del producto"
-                // loading={isLoading}
-                // onResultSelect={this.handleResultSelect}
-                // onSearchChange={this.handleSearchChange}
-                // results={results}
-                // value={value}
-                // {...this.props}
+                value={searchName}
+                onChange={this.onSearchChange}
               />
             </Form.Field>
           </Form.Group>
@@ -45,15 +68,12 @@ class FiltersBar extends Component {
           >
             <Form.Field>
               <Label pointing="below">Filtros</Label>
-              <Search
-                category
+              <Input
+                icon="search"
+                id="searchQuantity"
                 placeholder="Cantidad"
-                // loading={isLoading}
-                // onResultSelect={this.handleResultSelect}
-                // onSearchChange={this.handleSearchChange}
-                // results={results}
-                // value={value}
-                // {...this.props}
+                value={searchQuantity}
+                onChange={this.onSearchChange}
               />
             </Form.Field>
           </Form.Group>
@@ -62,7 +82,13 @@ class FiltersBar extends Component {
             widths="equal"
             unstackable
           >
-            <Form.Field control={Checkbox} label="Solo disponibles" />
+            <Form.Field
+              control={Checkbox}
+              id="onlyAvailables"
+              checked={onlyAvailables}
+              label="Solo disponibles"
+              onChange={this.onSearchChange}
+            />
           </Form.Group>
 
           <Form.Group
@@ -70,14 +96,16 @@ class FiltersBar extends Component {
             unstackable
           >
             <label>Orden por</label>
-            <Form.Field control={Radio} label="Precio" value="1" checked={value === '1'} onChange={this.handleChange} />
-            <Form.Field control={Radio} label="Cantidad" value="2" checked={value === '2'} onChange={this.handleChange} />
-            <Form.Field control={Radio} label="Disponible" value="3" checked={value === '3'} onChange={this.handleChange} />
+            <Form.Field control={Radio} checked={price} label="Precio" id="price" onChange={this.onSearchChange} />
+            <Form.Field control={Radio} checked={quantity} label="Cantidad" id="quantity" onChange={this.onSearchChange} />
+            <Form.Field control={Radio} checked={available} label="Disponibilidad" id="available" onChange={this.onSearchChange} />
           </Form.Group>
         </Form>
       </Grid>
     )
   }
 }
+
+FiltersBar.propTypes = propTypes
 
 export default FiltersBar
