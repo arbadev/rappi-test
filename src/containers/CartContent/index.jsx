@@ -10,7 +10,7 @@ import styles from './cartContent.css'
 import CartItem from '../../components/CartItem'
 
 const propTypes = {
-  products: PropTypes.array,
+  items: PropTypes.array,
 }
 
 class CartContent extends Component {
@@ -21,30 +21,33 @@ class CartContent extends Component {
     }
 
     this.handleCheckout = this.handleCheckout.bind(this)
+    this.renderProducts = this.renderProducts.bind(this)
   }
 
   handleCheckout(product) {
     console.log('product here', product)
   }
 
+  renderProducts(items) {
+    if (items.length > 0) {
+      return items.map((item) => {
+        return (
+          <CartItem
+            key={item.product.id}
+            item={item}
+            addToCart={this.handleCheckout}
+          />
+        )
+      })
+    }
+    return <Statistic label="No tiene items registrados en su carrito" className={styles.heading} />
+  }
+
   render() {
-    const { products } = this.props
-    console.log('products', products)
+    const { items } = this.props
+    console.log('cart items', items)
     return (
       <div>
-        <Row center="xs">
-          <Statistic
-            className={styles.heading}
-          >
-            <Statistic.Value>{products.length} </Statistic.Value>
-            <Statistic.Label>Productos</Statistic.Label>
-          </Statistic>
-          <Col xs={12}>
-            <Card.Group centered>
-              <CartItem product={products[0]} addToCart={this.handleCheckout} />
-            </Card.Group>
-          </Col>
-        </Row>
         <Link to="/">
           <Button
             icon="arrow left"
@@ -54,6 +57,19 @@ class CartContent extends Component {
           />
         </Link>
 
+        <Row center="xs">
+          <Statistic
+            className={styles.heading}
+          >
+            <Statistic.Value>{items.length} </Statistic.Value>
+            <Statistic.Label>Productos</Statistic.Label>
+          </Statistic>
+          <Col xs={12}>
+            <Card.Group centered>
+              {this.renderProducts(items)}
+            </Card.Group>
+          </Col>
+        </Row>
       </div>
     )
   }
@@ -61,7 +77,7 @@ class CartContent extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    products: state.inventory.products,
+    items: state.cart.items,
   }
 }
 

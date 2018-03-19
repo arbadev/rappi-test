@@ -1,13 +1,25 @@
 import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { Row, Col } from 'react-flexbox-grid'
 import { Card, Statistic } from 'semantic-ui-react'
-
+/*
+ * Styles
+*/
 import styles from './productsContent.css'
-
+/*
+ * Components
+*/
 import Product from '../../components/Product'
+
+/*
+ * Actions
+*/
+import { addProduct } from '../../actions/cart'
 
 const propTypes = {
   products: PropTypes.array,
+  addProduct: PropTypes.func,
 }
 
 class ProductsContent extends Component {
@@ -22,7 +34,7 @@ class ProductsContent extends Component {
   }
 
   handleAddToCart(product) {
-    console.log('product', product)
+    this.props.addProduct(product)
   }
 
   renderProducts(products) {
@@ -51,7 +63,7 @@ class ProductsContent extends Component {
           value={products.length}
         />
         <Row center="xs">
-          <Col xs={12}>
+          <Col xs={10}>
             <Card.Group centered>
               {this.renderProducts(products)}
             </Card.Group>
@@ -63,6 +75,19 @@ class ProductsContent extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    // categories: state.inventory.categories,
+    // products: state.inventory.filteredProduts,
+  }
+}
+
+const matchDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    addProduct,
+  }, dispatch)
+}
+
 ProductsContent.propTypes = propTypes
 
-export default ProductsContent
+export default connect(mapStateToProps, matchDispatchToProps)(ProductsContent)

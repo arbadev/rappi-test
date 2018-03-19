@@ -11,17 +11,27 @@ const propTypes = {
 class Product extends PureComponent {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      quantity: 0,
+    }
     this.onAddProduct = this.onAddProduct.bind(this)
+    this.onQuantityChange = this.onQuantityChange.bind(this)
   }
 
   onAddProduct() {
     const { product, addToCart } = this.props
-    return addToCart(product)
+    const { quantity } = this.state
+    return addToCart({ product, quantity })
+  }
+
+  onQuantityChange(e, { value }) {
+    e.preventDefault()
+    this.setState({ quantity: parseInt(10, value) })
   }
 
   render() {
     const { product } = this.props
+    const { quantity } = this.state
     return (
       <Card
         color={product.quantity > 0 ? 'green' : 'red'}
@@ -50,10 +60,11 @@ class Product extends PureComponent {
             type="number"
             actionPosition="left"
             placeholder="Cantidad..."
-            defaultValue={0}
+            value={quantity}
             max={product.quantity}
             min={0}
             size="medium"
+            onChange={this.onQuantityChange}
           />
         </Card.Content>
       </Card>

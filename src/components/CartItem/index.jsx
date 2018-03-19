@@ -4,7 +4,7 @@ import { Card, Input } from 'semantic-ui-react'
 import styles from './cartItem.css'
 
 const propTypes = {
-  product: PropTypes.object,
+  item: PropTypes.object,
   addToCart: PropTypes.func,
 }
 
@@ -16,12 +16,13 @@ class CartItem extends PureComponent {
   }
 
   onCheckout() {
-    const { product, addToCart } = this.props
-    return addToCart(product)
+    const { item, addToCart } = this.props
+    return addToCart(item)
   }
 
   render() {
-    const { product } = this.props
+    const { item } = this.props
+    console.log('adadasdasdasdas item men dude', item)
     return (
       <Card
         color="green"
@@ -29,13 +30,13 @@ class CartItem extends PureComponent {
       >
         <Card.Content>
           <Card.Header>
-            {product.name}
+            {item.product.name}
           </Card.Header>
           <Card.Meta>
-            {product.price}
+            {item.product.price}
           </Card.Meta>
           <Card.Description>
-            <strong>Disponibles</strong> {product.quantity}
+            <strong>Disponibles</strong> {item.product.quantity}
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
@@ -50,8 +51,8 @@ class CartItem extends PureComponent {
             type="number"
             actionPosition="left"
             placeholder="Cantidad..."
-            defaultValue={0}
-            max={product.quantity}
+            defaultValue={item.quantity}
+            max={item.product.quantity}
             min={0}
             size="medium"
           />
