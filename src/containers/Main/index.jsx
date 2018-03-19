@@ -38,8 +38,6 @@ const propTypes = {
   setCategory: PropTypes.func,
 }
 
-const parsePrice = price => price.split('$')[1]
-
 const sortByProp = (products, prop) => {
   return products.sort((a, b) => {
     if (prop === 'price') {
