@@ -51,10 +51,6 @@ class Main extends Component {
     this.handleFiltersState = this.handleFiltersState.bind(this)
   }
 
-  componentDidMount() {
-    // console.log('app width', this.category.offsetWidth)
-  }
-
   componentWillReceiveProps(nextProps) {
     console.log('nextProps', nextProps)
     const { products } = nextProps
@@ -62,7 +58,7 @@ class Main extends Component {
   }
 
   handleSetCategory(category) {
-    console.log('asdasdasdas category', category)
+    // console.log('category', category)
     this.props.setCategory(category)
   }
 
@@ -72,6 +68,8 @@ class Main extends Component {
 
   handleFiltersState(state) {
     console.log('state @ filtersBar', state)
+    // const { products } = this.state
+    // products.filter((product) => {})
   }
 
   render() {

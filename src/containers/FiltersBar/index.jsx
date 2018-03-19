@@ -21,7 +21,7 @@ class FiltersBar extends Component {
 
     this.state = {
       searchName: '',
-      searchQuantity: '',
+      searchQuantity: '0',
       onlyAvailables: false,
       sortBy: {
         price: false,
@@ -83,7 +83,7 @@ class FiltersBar extends Component {
             unstackable
           >
             <Form.Field>
-              <Label pointing="below">Filtros</Label>
+              <Label pointing="below">Cantidad</Label>
               <Input
                 type="number"
                 icon="search"
@@ -98,7 +98,9 @@ class FiltersBar extends Component {
           <Form.Group
             widths="equal"
             unstackable
+            inline
           >
+            <Label size="large">Filtros</Label>
             <Form.Field
               control={Checkbox}
               id="onlyAvailables"
@@ -113,10 +115,10 @@ class FiltersBar extends Component {
             unstackable
             widths="equal"
           >
-            <label>Ordenar</label>
+            <Label size="large">Ordenar</Label>
             <Form.Field control={Radio} checked={sortBy.price} label="Precio" id="price" onChange={this.onSearchChange} />
             <Form.Field control={Radio} checked={sortBy.quantity} label="Cantidad" id="quantity" onChange={this.onSearchChange} />
-            {/* <Form.Field control={Radio} checked={available} label="Disponibilidad" id="available" onChange={this.onSearchChange} /> */}
+            {/* <Form.Field control={Radio} checked={sortBy.available} label="Disponibilidad" id="available" onChange={this.onSearchChange} /> */}
           </Form.Group>
         </Form>
       </Grid>
