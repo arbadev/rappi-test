@@ -22,7 +22,6 @@ class CartItem extends PureComponent {
 
   render() {
     const { item } = this.props
-    console.log('adadasdasdasdas item men dude', item)
     return (
       <Card
         color="green"

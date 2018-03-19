@@ -7,7 +7,7 @@ import { SET_CATEGORY } from '../actions/inventory'
 
 const initialState = {
   selectedCategory: null,
-  filteredProduts: productsData.products,
+  filteredProduts: [],
   categories: categoriesData.categories,
   products: productsData.products,
 }
