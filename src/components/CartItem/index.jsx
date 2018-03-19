@@ -11,17 +11,28 @@ const propTypes = {
 class CartItem extends PureComponent {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      quantity: this.props.item.quantity,
+    }
     this.onCheckout = this.onCheckout.bind(this)
+    this.onQuantityChange = this.onQuantityChange.bind(this)
+  }
+
+  onQuantityChange(e, { value }) {
+    e.preventDefault()
+    this.setState({ quantity: parseInt(value) })
   }
 
   onCheckout() {
     const { item, addToCart } = this.props
+    const { quantity } = this.state
+    item.quantity = quantity
     return addToCart(item)
   }
 
   render() {
     const { item } = this.props
+    const { quantity } = this.state
     return (
       <Card
         color="green"
@@ -46,14 +57,17 @@ class CartItem extends PureComponent {
               icon: 'shopping bag',
               content: 'Comprar',
               onClick: this.onCheckout,
+              disabled: quantity <= 0,
             }}
             type="number"
             actionPosition="left"
             placeholder="Cantidad..."
-            defaultValue={item.quantity}
+            defaultValue={quantity}
             max={item.product.quantity}
             min={0}
             size="medium"
+            onChange={this.onQuantityChange}
+            className={styles.btn}
           />
         </Card.Content>
       </Card>

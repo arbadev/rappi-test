@@ -49,7 +49,7 @@ class ProductsContent extends Component {
         )
       })
     }
-    return <Statistic label="Intente nueva busqueda" className={styles.heading} />
+    return <Statistic label="Por favor seleccione una categoria" className={styles.heading} />
   }
 
   render() {

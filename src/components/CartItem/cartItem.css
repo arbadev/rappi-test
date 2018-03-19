@@ -21,3 +21,15 @@ Breakpoints arguments choices:
     transform: translateY(-0.5rem) scale(1.03); }
   .cartItem__label:not(:last-child) {
     margin-bottom: 1rem; }
+
+.btn:hover {
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
+  transform: translateY(-0.2rem); }
+  .btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0; }
+
+.btn:active, .btn:focus {
+  outline: none;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  transform: translateY(-0.1rem); }

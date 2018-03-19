@@ -26,7 +26,7 @@ class Product extends PureComponent {
 
   onQuantityChange(e, { value }) {
     e.preventDefault()
-    this.setState({ quantity: parseInt(10, value) })
+    this.setState({ quantity: parseInt(value) })
   }
 
   render() {
@@ -56,6 +56,7 @@ class Product extends PureComponent {
               icon: 'cart',
               content: 'Agregar',
               onClick: this.onAddProduct,
+              disabled: quantity <= 0,
             }}
             type="number"
             actionPosition="left"
@@ -65,6 +66,7 @@ class Product extends PureComponent {
             min={0}
             size="medium"
             onChange={this.onQuantityChange}
+            className={styles.btn}
           />
         </Card.Content>
       </Card>
