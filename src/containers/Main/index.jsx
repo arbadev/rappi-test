@@ -38,6 +38,17 @@ const propTypes = {
   setCategory: PropTypes.func,
 }
 
+const parsePrice = price => price.split('$')[1]
+
+const sortByProp = (products, prop) => {
+  return products.sort((a, b) => {
+    if (prop === 'price') {
+      return a[prop].replace(/[^\d.]/g, '') - b[prop].replace(/[^\d.]/g, '')
+    }
+    return a[prop] - b[prop]
+  })
+}
+
 class Main extends Component {
   constructor(props) {
     super(props)
@@ -66,10 +77,33 @@ class Main extends Component {
     this.setState({ visible: !this.state.visible })
   }
 
-  handleFiltersState(state) {
-    console.log('state @ filtersBar', state)
-    // const { products } = this.state
-    // products.filter((product) => {})
+  handleFiltersState(filtersState) {
+    const {
+      searchName, searchQuantity, onlyAvailables, sortBy,
+    } = filtersState
+    const { products } = this.props
+    let filteredProduts = products.filter((product) => {
+      let auxName = true
+      let auxQuantity = false
+      let auxAvailable = true
+
+      if (searchName && searchName.length > 0) {
+        auxName = product.name.includes(searchName)
+      }
+      auxQuantity = product.quantity >= searchQuantity
+
+      if (onlyAvailables) {
+        auxAvailable = product.quantity > 0
+      }
+      return auxName && auxQuantity && auxAvailable
+    })
+    if (sortBy.price || sortBy.quantity) {
+      const sortProp = sortBy.price ? 'price' : 'quantity'
+      filteredProduts = sortByProp(filteredProduts, sortProp)
+    }
+    this.setState({
+      products: filteredProduts,
+    })
   }
 
   render() {

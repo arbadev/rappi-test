@@ -88,6 +88,7 @@ class FiltersBar extends Component {
                 type="number"
                 icon="search"
                 id="searchQuantity"
+                min={0}
                 placeholder="Cantidad"
                 value={searchQuantity}
                 onChange={this.onSearchChange}
