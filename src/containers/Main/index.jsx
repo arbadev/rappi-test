@@ -61,7 +61,6 @@ class Main extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps', nextProps)
     const { products } = nextProps
     this.setState({ products })
   }

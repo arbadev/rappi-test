@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
       const fIndex = filteredProduts.findIndex(p => p.id === order.product.id)
       return update(state, {
         products: { [pIndex]: { quantity: { $set: products[pIndex].quantity - order.quantity } } },
-        filteredProduts: { [fIndex]: { quantity: { $set: products[fIndex].quantity - order.quantity } } },
+        filteredProduts: { [fIndex]: { quantity: { $set: filteredProduts[fIndex].quantity - order.quantity } } },
       })
     }
     default:
