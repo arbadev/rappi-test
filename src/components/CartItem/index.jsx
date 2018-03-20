@@ -13,6 +13,7 @@ class CartItem extends PureComponent {
     super(props)
     this.state = {
       quantity: this.props.item.quantity,
+
     }
     this.onCheckout = this.onCheckout.bind(this)
     this.onQuantityChange = this.onQuantityChange.bind(this)
@@ -20,6 +21,8 @@ class CartItem extends PureComponent {
 
   onQuantityChange(e, { value }) {
     e.preventDefault()
+    const { quantity } = this.props.item.product
+    value = value > quantity ? quantity : value
     this.setState({ quantity: parseInt(value) })
   }
 
@@ -62,7 +65,7 @@ class CartItem extends PureComponent {
             type="number"
             actionPosition="left"
             placeholder="Cantidad..."
-            defaultValue={quantity}
+            value={quantity}
             max={item.product.quantity}
             min={0}
             size="medium"

@@ -26,6 +26,8 @@ class Product extends PureComponent {
 
   onQuantityChange(e, { value }) {
     e.preventDefault()
+    const { quantity } = this.props.product
+    value = value > quantity ? quantity : value
     this.setState({ quantity: parseInt(value) })
   }
 
