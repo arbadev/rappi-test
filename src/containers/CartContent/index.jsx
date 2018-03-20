@@ -9,8 +9,14 @@ import styles from './cartContent.css'
 
 import CartItem from '../../components/CartItem'
 
+/*
+ * Actions
+*/
+import { removeProduct } from '../../actions/cart'
+
 const propTypes = {
   items: PropTypes.array,
+  removeProduct: PropTypes.func,
 }
 
 class CartContent extends Component {
@@ -24,8 +30,8 @@ class CartContent extends Component {
     this.renderProducts = this.renderProducts.bind(this)
   }
 
-  handleCheckout(product) {
-    console.log('product here', product)
+  handleCheckout(order) {
+    this.props.removeProduct(order)
   }
 
   renderProducts(items) {
@@ -35,7 +41,7 @@ class CartContent extends Component {
           <CartItem
             key={item.product.id}
             item={item}
-            addToCart={this.handleCheckout}
+            proceedCheckout={this.handleCheckout}
           />
         )
       })
@@ -45,7 +51,7 @@ class CartContent extends Component {
 
   render() {
     const { items } = this.props
-    console.log('cart items', items)
+    // console.log('cart items', items)
     return (
       <div>
         <Link to="/">
@@ -83,6 +89,7 @@ const mapStateToProps = (state) => {
 
 const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
+    removeProduct,
   }, dispatch)
 }
 

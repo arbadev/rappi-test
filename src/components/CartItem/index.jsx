@@ -5,7 +5,7 @@ import styles from './cartItem.css'
 
 const propTypes = {
   item: PropTypes.object,
-  addToCart: PropTypes.func,
+  proceedCheckout: PropTypes.func,
 }
 
 class CartItem extends PureComponent {
@@ -24,10 +24,10 @@ class CartItem extends PureComponent {
   }
 
   onCheckout() {
-    const { item, addToCart } = this.props
+    const { item, proceedCheckout } = this.props
     const { quantity } = this.state
     item.quantity = quantity
-    return addToCart(item)
+    return proceedCheckout(item)
   }
 
   render() {
