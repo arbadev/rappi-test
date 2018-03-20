@@ -13,10 +13,12 @@ import CartItem from '../../components/CartItem'
  * Actions
 */
 import { removeProduct } from '../../actions/cart'
+import { discountProduct } from '../../actions/inventory'
 
 const propTypes = {
   items: PropTypes.array,
   removeProduct: PropTypes.func,
+  discountProduct: PropTypes.func,
 }
 
 class CartContent extends Component {
@@ -32,6 +34,7 @@ class CartContent extends Component {
 
   handleCheckout(order) {
     this.props.removeProduct(order)
+    this.props.discountProduct(order)
   }
 
   renderProducts(items) {
@@ -90,6 +93,7 @@ const mapStateToProps = (state) => {
 const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
     removeProduct,
+    discountProduct,
   }, dispatch)
 }
 

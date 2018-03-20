@@ -38,7 +38,7 @@ class CartItem extends PureComponent {
     const { quantity } = this.state
     return (
       <Card
-        color="green"
+        // color="green"
         className={styles.cartItem}
       >
         <Card.Content>
