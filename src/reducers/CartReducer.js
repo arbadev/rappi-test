@@ -15,7 +15,7 @@ export default (state = initialState, action) => {
       const index = items.findIndex(o => o.product.id === order.product.id)
       const opts = index > -1 ?
         update(state, {
-          items: { [index]: { quantity: { $set: order.quantity + items[index].quantity } } },
+          items: { [index]: { quantity: { $set: (order.quantity + items[index].quantity) > items[index].product.quantity ? items[index].product.quantity : (order.quantity + items[index].quantity) } } },
         })
         :
         update(state, {
