@@ -1,5 +1,5 @@
-# Rappi dode challenge
-Rappi store code challenge
+# Rappi challenge
+Rappi frontend code challenge, create a virtual store
 
 Table of Contents
 -----------------
