@@ -11,7 +11,7 @@ const propTypes = {
 const getSortByUpdate = (id, sortBy) => {
   console.log(Object.keys(sortBy))
   Object.keys(sortBy).map(key => key === id ? sortBy[key] = true : sortBy[key] = false)
-  console.log('sortBy', sortBy)
+  // console.log('sortBy', sortBy)
   return { sortBy }
 }
 

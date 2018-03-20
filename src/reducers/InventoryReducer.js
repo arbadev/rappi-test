@@ -3,11 +3,11 @@ import update from 'immutability-helper'
 import categoriesData from '../data/categories.json'
 import productsData from '../data/products.json'
 
-import { SET_CATEGORY } from '../actions/inventory'
+import { SET_CATEGORY, DISCOUNT_PRODUCT } from '../actions/inventory'
 
 const initialState = {
   selectedCategory: null,
-  filteredProduts: productsData.products,
+  filteredProduts: [],
   categories: categoriesData.categories,
   products: productsData.products,
 }
@@ -23,6 +23,16 @@ export default (state = initialState, action) => {
       return update(state, {
         selectedCategory: { $set: category },
         filteredProduts: { $set: filteredProduts },
+      })
+    }
+    case DISCOUNT_PRODUCT: {
+      const { order } = action
+      const { products, filteredProduts } = state
+      const pIndex = products.findIndex(p => p.id === order.product.id)
+      const fIndex = filteredProduts.findIndex(p => p.id === order.product.id)
+      return update(state, {
+        products: { [pIndex]: { quantity: { $set: products[pIndex].quantity - order.quantity } } },
+        filteredProduts: { [fIndex]: { quantity: { $set: products[fIndex].quantity - order.quantity } } },
       })
     }
     default:
