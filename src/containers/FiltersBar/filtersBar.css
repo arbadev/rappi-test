@@ -1,0 +1,24 @@
+/*
+0 - 600px: Phone
+600 - 900px:  Tablet Portrait
+900 - 1200px: Tablet Landscape
+[1200 - 1800px]:  Is where our styles apply
+1800px +:  Big Desktop
+
+Breakpoints arguments choices:
+
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+1em = 16px
+*/
+.grid {
+  padding: 2rem; }
+
+.formItem {
+  margin-bottom: 1rem; }
+  @media (min-width: 48em) {
+    .formItem {
+      margin-bottom: 2rem; } }

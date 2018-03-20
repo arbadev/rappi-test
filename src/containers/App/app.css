@@ -1,18 +1,41 @@
+/*
+0 - 600px: Phone
+600 - 900px:  Tablet Portrait
+900 - 1200px: Tablet Landscape
+[1200 - 1800px]:  Is where our styles apply
+1800px +:  Big Desktop
+
+Breakpoints arguments choices:
+
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+1em = 16px
+*/
 *,
 *::after,
 *::before {
   box-sizing: inherit;
   margin: 0;
-  padding: 0;
-}
+  padding: 0; }
 
 body {
+  color: #282c37;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
   background-color: #eee;
   box-sizing: border-box;
-  font-size: 1.6rem;
   margin: 0 auto;
-}
+  padding: 1rem; }
 
 html {
-  font-size: 62.5%;
-}
+  font-size: 62.5%; }
+
+.app {
+  padding: 1rem;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15); }

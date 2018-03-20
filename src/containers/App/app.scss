@@ -1,0 +1,41 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  //global font styles
+  color: $color-primary-dark;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+
+  // global regular styles
+  background-color: $color-grey-light;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+html {
+  // this defines 1rem
+  font-size: 62.5%; // 1rem = 10px     10px/16px = 62.5%
+}
+
+.app {
+  // background-color: $color-primary-light;
+  padding: 1rem;
+  // height: 100rem;
+
+
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: $regular-box-shadow;
+
+}

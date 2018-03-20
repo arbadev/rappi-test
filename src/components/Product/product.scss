@@ -1,0 +1,37 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+
+.product {
+  box-shadow: $regular-box-shadow;
+  transition: transform .3s;
+
+  &:hover {
+    transform: translateY(-.5rem) scale(1.03);
+  }
+
+  &__label {
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.btn {
+  &:hover {
+    box-shadow: 0 .5rem 2rem rgba($color-black, .2);
+    transform: translateY(-0.2rem);
+
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active,
+  &:focus { // in order to keep some efect when focus the button
+    outline: none;
+    box-shadow: 0 .5rem 1rem rgba($color-black, .2);
+    transform: translateY(-0.1rem);
+  }
+}

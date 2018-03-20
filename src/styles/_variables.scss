@@ -1,0 +1,33 @@
+// Colors
+
+$color-primary-light: #d9e1e8;
+$color-primary: #9baec8;
+$color-primary-dark: #282c37;
+
+$color-secondary: #2b90d9;
+$color-secondary-light: #80d4f6;
+$color-secondary-dark: #4f86c6;
+
+$color-white: #fff;
+$color-black: #000;
+
+$color-grey-dark: #777;
+$color-grey-light: #eee;
+
+
+$primary-right-linear-gradient: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+$primary-left-linear-gradient: linear-gradient(to left, $color-primary-light, $color-primary-dark);
+$secondary-right-linear-gradient: linear-gradient(to right, $color-secondary, $color-secondary-dark);
+$secondary-left-linear-gradient: linear-gradient(to left, $color-secondary-light, $color-secondary);
+
+$gradient-titanium-right: linear-gradient(to right, #283048, #859398);
+$gradient-titanium-left: linear-gradient(to left, #283048, #859398);
+
+// font
+
+$default-font-size: 1.6rem;
+
+// Shadow
+
+$regular-box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+$high-box-shadow: 0 3rem 5rem rgba($color-black, .4);

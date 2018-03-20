@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { HashRouter, Route, Switch } from 'react-router-dom'
 import 'normalize-css'
 
 import styles from './app.css'
-import Header from '../../components/Header'
+// import Header from '../../components/Header'
 import Main from '../Main'
+import CartContent from '../CartContent'
 
 class App extends Component {
   constructor() {
@@ -16,9 +17,10 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <div className={styles.body}>
-          <Header />
+      <HashRouter basename="/">
+        <div
+          className={styles.app}
+        >
 
           <Switch>
             <Route exact path="/"
@@ -29,9 +31,20 @@ class App extends Component {
                   )
                 }}
             />
+
+            <Route path="/cart"
+              render={
+                () => {
+                  return (
+                    <CartContent />
+                  )
+                }}
+            />
+
           </Switch>
+
         </div>
-      </Router>
+      </HashRouter>
     )
   }
 }

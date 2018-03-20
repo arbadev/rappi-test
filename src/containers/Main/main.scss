@@ -1,0 +1,50 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.main {
+  // height: 95rem;
+  border-radius: 3px;
+  // overflow: hidden;
+  // background-color: $color-primary;
+  // overflow: visible !important;
+
+  &__content {
+    margin: 2rem 0;
+    border-radius: 3px;
+    overflow: hidden;
+    // background-color: $color-primary-dark;
+  }
+
+  &__filterGrid {
+    height: 10rem;
+    // background-image: $gradient-titanium-right;
+    // background-color: $color-secondary;
+    margin-bottom: 12rem;
+
+    @include responsive(tablet) {
+      // height: 90rem;
+      margin-bottom: 10rem;
+    }
+
+    // @include responsive(phone) {
+    //   height: 10rem;
+    //   margin-bottom: 0;
+    // }
+  }
+
+  &__productsGrid {
+    // height: 90rem;
+    padding: 1rem;
+    //
+    // @include responsive(tab-port) {
+    //
+    // }
+    // background-image: $gradient-titanium-left;
+    // background-color: $color-secondary;
+  }
+
+}
+
+.sidebar {
+  overflow: visible !important;
+}

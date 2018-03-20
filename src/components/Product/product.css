@@ -1,0 +1,35 @@
+/*
+0 - 600px: Phone
+600 - 900px:  Tablet Portrait
+900 - 1200px: Tablet Landscape
+[1200 - 1800px]:  Is where our styles apply
+1800px +:  Big Desktop
+
+Breakpoints arguments choices:
+
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+1em = 16px
+*/
+.product {
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  transition: transform .3s; }
+  .product:hover {
+    transform: translateY(-0.5rem) scale(1.03); }
+  .product__label:not(:last-child) {
+    margin-bottom: 1rem; }
+
+.btn:hover {
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
+  transform: translateY(-0.2rem); }
+  .btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0; }
+
+.btn:active, .btn:focus {
+  outline: none;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  transform: translateY(-0.1rem); }
